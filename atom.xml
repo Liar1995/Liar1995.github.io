@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://summer.com/"/>
-  <updated>2016-07-04T10:54:59.443Z</updated>
+  <updated>2016-10-11T10:21:02.124Z</updated>
   <id>http://summer.com/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>VideoRender</title>
+    <link href="http://summer.com/2016/10/11/VideoRender/"/>
+    <id>http://summer.com/2016/10/11/VideoRender/</id>
+    <published>2016-10-11T10:05:05.000Z</published>
+    <updated>2016-10-11T10:21:02.124Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Android-SurfaceTexture，TextureView，SurfaceView-and-GLSurfaceView"><a href="#Android-SurfaceTexture，TextureView，SurfaceView-and-GLSurfaceView" class="headerlink" title="Android SurfaceTexture，TextureView，SurfaceView and GLSurfaceView"></a>Android SurfaceTexture，TextureView，SurfaceView and GLSurfaceView</h1><hr>
+<blockquote>
+<p>原文来自：<a href="ariesjzj">http://blog.csdn.net/jinzhuojun/article/details/44062175</a></p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在开发视频播放器这块，因为一个视频旋转的需求而卷入Android的各种<strong>VideoRender</strong>，后来读了<strong>ariesjzj</strong>大神写的一片Blog，对<strong>VideoRender</strong>做了很有深度的分析，特此总结，做一些笔记。</p>
+<h3 id="SurfaceView-Android-1-0-API-level-1"><a href="#SurfaceView-Android-1-0-API-level-1" class="headerlink" title="SurfaceView Android 1.0(API level 1)"></a><strong>SurfaceView</strong> Android 1.0(API level 1)</h3><p>本质上是一个View，它有自己的Surface，它与宿主窗口是分离的，好处是对这个Surface的渲染可以放到单独线程去做，渲染时可以有自己的GLcontext。这对于一些游戏、视频等性能相关的应用非常有益，因为它不会影响主线程对事件的响应。但它也有缺点，因为这个Surface不在Viewhierachy中，它的显示也不受View的属性控制，所以不能进行平移，缩放等变换，也不能放在其它ViewGroup中，一些View中的特性也无法使用，SurfaceView中的SurfaceHolder主要是提供了一坨操作Surface的接口。</p>
+<h3 id="GLSurfaceView-Android-1-5-API-level-3"><a href="#GLSurfaceView-Android-1-5-API-level-3" class="headerlink" title="GLSurfaceView Android 1.5(API level 3)"></a><strong>GLSurfaceView</strong> Android 1.5(API level 3)</h3><p>可以看作是SurfaceView的一种典型使用模式。在SurfaceView的基础上，它加入了EGL的管理，并自带了渲染线程。另外它定义了用户需要实现的Render接口，提供了用Strategypattern更改具体Render行为的灵活性。作为GLSurfaceView的Client，只需要将实现了渲染函数的Renderer的实现类设置给GLSurfaceView即可。GLSurfaceView中的EglHelper和GLThread分别实现了上面提到的管理EGL环境和渲染线程的工作。GLSurfaceView的使用者需要实现Renderer接口。</p>
+<h3 id="SurfaceTexture-Android-3-0-API-level-11"><a href="#SurfaceTexture-Android-3-0-API-level-11" class="headerlink" title="SurfaceTexture Android 3.0(API level 11)"></a><strong>SurfaceTexture</strong> Android 3.0(API level 11)</h3><p><img src="http://o9sbm4il4.bkt.clouddn.com/SurfaceTexture.png" alt="SurfaceTexture"></p>
+<p>一般作为中间层，它对图像流的处理并不直接显示，而是转为GL外部纹理，因此可用于图像流数据的二次处理（如Camera滤镜，桌面特效等）。比如Camera的预览数据，变成纹理后可以交给GLSurfaceView直接显示，也可以通过SurfaceTexture交给TextureView作为View heirachy中的一个硬件加速层来显示。</p>
+<h3 id="TextureView-Android-4-0-API-level-14"><a href="#TextureView-Android-4-0-API-level-14" class="headerlink" title="TextureView Android 4.0(API level 14)"></a><strong>TextureView</strong> Android 4.0(API level 14)</h3><p>它可以将内容流直接投影到View中，可以用于实现Livepreview等功能。和SurfaceView不同，它不会在WMS中单独创建窗口，而是作为View hierachy中的一个普通View，因此可以和其它普通View一样进行移动，旋转，缩放，动画等变化。值得注意的是TextureView必须在硬件加速的窗口中。TextureView继承自View，它与其它的View一样在View hierachy中管理与绘制。TextureView重载了draw()方法，其中主要把SurfaceTexture中收到的图像数据作为纹理更新到对应的HardwareLayer中。SurfaceTexture.OnFrameAvailableListener用于通知TextureView内容流有新图像到来。SurfaceTextureListener接口用于让TextureView的使用者知道SurfaceTexture已准备好，这样就可以把SurfaceTexture交给相应的内容源。</p>
+<hr>
+<p>最后，总结下这几者的区别和联系。简单地说，SurfaceView是一个有自己Surface的View。它的渲染可以放在单独线程而不是主线程中。其缺点是不能做变形和动画。SurfaceTexture可以用作非直接输出的内容流，这样就提供二次处理的机会。与SurfaceView直接输出相比，这样会有若干帧的延迟。同时，由于它本身管理BufferQueue，因此内存消耗也会稍微大一些。TextureView是一个可以把内容流作为外部纹理输出在上面的View。它本身需要是一个硬件加速层。事实上TextureView本身也包含了SurfaceTexture。它与SurfaceView+SurfaceTexture组合相比可以完成类似的功能（即把内容流上的图像转成纹理，然后输出）。区别在于TextureView是在View hierachy中做绘制，因此一般它是在主线程上做的（在Android5.0引入渲染线程后，它是在渲染线程中做的）。而SurfaceView+SurfaceTexture在单独的Surface上做绘制，可以是用户提供的线程，而不是系统的主线程或是渲染线程。另外，与TextureView相比，它还有个好处是可以用Hardware overlay进行显示。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;Android-SurfaceTexture，TextureView，SurfaceView-and-GLSurfaceView&quot;&gt;&lt;a href=&quot;#Android-SurfaceTexture，TextureView，SurfaceView-and-GLSur
+    
+    </summary>
+    
+    
+      <category term="SurfaceTexture" scheme="http://summer.com/tags/SurfaceTexture/"/>
+    
+      <category term="TextureView" scheme="http://summer.com/tags/TextureView/"/>
+    
+      <category term="SurfaceView" scheme="http://summer.com/tags/SurfaceView/"/>
+    
+      <category term="GLSurfaceView" scheme="http://summer.com/tags/GLSurfaceView/"/>
+    
+      <category term="VideoRender" scheme="http://summer.com/tags/VideoRender/"/>
+    
+  </entry>
   
   <entry>
     <title>IOS 10 Wallpager</title>
