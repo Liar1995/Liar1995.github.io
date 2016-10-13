@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://summer.com/"/>
-  <updated>2016-10-11T10:21:02.124Z</updated>
+  <updated>2016-10-13T09:34:40.581Z</updated>
   <id>http://summer.com/</id>
   
   <author>
@@ -14,6 +14,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>InflateException</title>
+    <link href="http://summer.com/2016/10/13/InflateException/"/>
+    <id>http://summer.com/2016/10/13/InflateException/</id>
+    <published>2016-10-13T09:33:50.000Z</published>
+    <updated>2016-10-13T09:34:40.581Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="解决-Android-view-InflateException-Binary-XML-file-line-9"><a href="#解决-Android-view-InflateException-Binary-XML-file-line-9" class="headerlink" title="解决 Android.view.InflateException: Binary XML file line #9"></a>解决 Android.view.InflateException: Binary XML file line #9</h1><hr>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在实际开发中，尤其涉及到CustomView的时候，经常会因为粗心什么的遇到<strong>InflateException</strong>这类问题。我遇到的是在API 20以上系统可以正常运行，以下的就直接崩溃，异常信息就是<strong>InflateException</strong>，崩溃的自定义View还恰好是VideoView，让我一度怀疑是ABI或者视频播放器的兼容性问题，踩了一些坑，收集了一些其他大神的心得，觉得我这个情况还是比较特殊，所以记录下来，供后辈参考哈哈哈~</p>
+<h3 id="1-自定义View引用类名问题"><a href="#1-自定义View引用类名问题" class="headerlink" title="1.自定义View引用类名问题"></a>1.自定义View引用类名问题</h3><p> 自定义了一个View，将用于布局文件xml中(包名com.Android.test，类名MyTestView)，在XML作为布局元素来布局的话， 必须使用完整路径名:com.android.test.MyTestView，也就是包名加类名来引用，还有别忘了导入命名空间。</p>
+<p><strong> 正确写法：</strong></p>
+<p> <code>&lt;com.android.test.MyTestView
+    android:id=&quot;@+id/test&quot;  
+    android:layout_width=&quot;fill_parent&quot;   
+    android:layout_height=&quot;fill_parent&quot; /&gt;</code></p>
+<p><strong> 错误写法：</strong></p>
+<p> <code>&lt;MyTestView
+    android:id=&quot;@+id/test&quot;  
+    android:layout_width=&quot;fill_parent&quot;   
+    android:layout_height=&quot;fill_parent&quot; /&gt;</code></p>
+<h3 id="2-自定义View的构造函数"><a href="#2-自定义View的构造函数" class="headerlink" title="2.自定义View的构造函数"></a>2.自定义View的构造函数</h3><p>自定义一个View，派生实现基类View的三个构造函数<br> <code>View(Context context)     //Simple constructor to use when creating a view from code</code><br> <code>View(Context context, AttributeSet attrs)     //Constructor that is called when inflating a view from XML</code><br> <code>View(Context context, AttributeSet attrs, int defStyle)     //Perform inflation from XML and apply a class-specific base style</code></p>
+<p>API 21以后还会多一个<br><code>View(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) //Perform inflation from XML and apply a class-specific base style from a
+theme attribute or style resource. This constructor of View allows subclasses to use their own base style when they are inflating.</code></p>
+<p>从文档上的介绍来看，第二个和第三个构造函数对于XML这种引用方式是必须实现的，这三个构造函数应该是在不同的应用场合来实例化<br>一个View对象。第四个一般对<strong>InflateException</strong>没有关系。</p>
+<h3 id="3-项目可能存在资源垃圾"><a href="#3-项目可能存在资源垃圾" class="headerlink" title="3.项目可能存在资源垃圾"></a>3.项目可能存在资源垃圾</h3><p>使用Android Studio在Build菜单下Clean project，然后在去Run。</p>
+<h3 id="4-找不到资源文件"><a href="#4-找不到资源文件" class="headerlink" title="4.找不到资源文件"></a>4.找不到资源文件</h3><p>一般情况下，UI会给我们一套资源图标，xh,xxh什么的，这个时候一定要严格放好了，我也怀疑的在API20以下出现的问题和这个有关系，但是添加了完整的一套没什么卵用。</p>
+<h3 id="5-终极解决方案"><a href="#5-终极解决方案" class="headerlink" title="5.终极解决方案"></a>5.终极解决方案</h3><p>终极解决方案，也是网上好多大神没有遇到的，条件比较奇葩，因为我项目比较大，把视频模块单独分出去，所以自然也加了<strong>multiDexEnabled</strong> ，分包本来就会产生一些问题，这次的问题也是由于分包导致，后来排查了很久，在我的Application中，覆写了attachBaseContext 方法，成功的解决了这个奇葩的问题。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">@Override</div><div class="line">protected void attachBaseContext(Context base) &#123;</div><div class="line">        super.attachBaseContext(base);</div><div class="line">        MultiDex.install(this);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;解决-Android-view-InflateException-Binary-XML-file-line-9&quot;&gt;&lt;a href=&quot;#解决-Android-view-InflateException-Binary-XML-file-line-9&quot; class=&quot;h
+    
+    </summary>
+    
+    
+      <category term="InflateException" scheme="http://summer.com/tags/InflateException/"/>
+    
+  </entry>
   
   <entry>
     <title>VideoRender</title>
