@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>Summer Blog</title>
+  <title>Summer〃</title>
   <subtitle>With the ability to hold up your ambition</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://summer.com/"/>
-  <updated>2016-10-13T09:34:40.581Z</updated>
+  <updated>2016-10-13T09:35:52.367Z</updated>
   <id>http://summer.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://summer.com/2016/10/13/InflateException/"/>
     <id>http://summer.com/2016/10/13/InflateException/</id>
     <published>2016-10-13T09:33:50.000Z</published>
-    <updated>2016-10-13T09:34:40.581Z</updated>
+    <updated>2016-10-13T09:35:52.367Z</updated>
     
     <content type="html"><![CDATA[<h1 id="解决-Android-view-InflateException-Binary-XML-file-line-9"><a href="#解决-Android-view-InflateException-Binary-XML-file-line-9" class="headerlink" title="解决 Android.view.InflateException: Binary XML file line #9"></a>解决 Android.view.InflateException: Binary XML file line #9</h1><hr>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在实际开发中，尤其涉及到CustomView的时候，经常会因为粗心什么的遇到<strong>InflateException</strong>这类问题。我遇到的是在API 20以上系统可以正常运行，以下的就直接崩溃，异常信息就是<strong>InflateException</strong>，崩溃的自定义View还恰好是VideoView，让我一度怀疑是ABI或者视频播放器的兼容性问题，踩了一些坑，收集了一些其他大神的心得，觉得我这个情况还是比较特殊，所以记录下来，供后辈参考哈哈哈~</p>
@@ -37,7 +37,7 @@
     android:layout_height=&quot;fill_parent&quot; /&gt;</code></p>
 <h3 id="2-自定义View的构造函数"><a href="#2-自定义View的构造函数" class="headerlink" title="2.自定义View的构造函数"></a>2.自定义View的构造函数</h3><p>自定义一个View，派生实现基类View的三个构造函数<br> <code>View(Context context)     //Simple constructor to use when creating a view from code</code><br> <code>View(Context context, AttributeSet attrs)     //Constructor that is called when inflating a view from XML</code><br> <code>View(Context context, AttributeSet attrs, int defStyle)     //Perform inflation from XML and apply a class-specific base style</code></p>
 <p>API 21以后还会多一个<br><code>View(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) //Perform inflation from XML and apply a class-specific base style from a
-theme attribute or style resource. This constructor of View allows subclasses to use their own base style when they are inflating.</code></p>
+ theme attribute or style resource. This constructor of View allows subclasses to use their own base style when they are inflating.</code></p>
 <p>从文档上的介绍来看，第二个和第三个构造函数对于XML这种引用方式是必须实现的，这三个构造函数应该是在不同的应用场合来实例化<br>一个View对象。第四个一般对<strong>InflateException</strong>没有关系。</p>
 <h3 id="3-项目可能存在资源垃圾"><a href="#3-项目可能存在资源垃圾" class="headerlink" title="3.项目可能存在资源垃圾"></a>3.项目可能存在资源垃圾</h3><p>使用Android Studio在Build菜单下Clean project，然后在去Run。</p>
 <h3 id="4-找不到资源文件"><a href="#4-找不到资源文件" class="headerlink" title="4.找不到资源文件"></a>4.找不到资源文件</h3><p>一般情况下，UI会给我们一套资源图标，xh,xxh什么的，这个时候一定要严格放好了，我也怀疑的在API20以下出现的问题和这个有关系，但是添加了完整的一套没什么卵用。</p>

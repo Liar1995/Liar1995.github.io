@@ -17,7 +17,8 @@
 
             xhr.onload = function() {
                 if (this.status >= 200 && this.status < 300) {
-                    searchData = JSON.parse(this.response);
+                    var res = JSON.parse(this.response);
+                    searchData = res instanceof Array ? res : res.posts;
                     success(searchData);
                 } else {
                     console.error(this.statusText);
@@ -114,6 +115,7 @@
     searchIco.addEventListener('click', function() {
         searchWrap.classList.toggle('in');
         keyInput.value = '';
+        keyInput.focus();
     });
 
     back.addEventListener('click', function() {
