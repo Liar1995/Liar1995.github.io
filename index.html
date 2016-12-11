@@ -143,6 +143,119 @@
       <ul class="post-list">
   
     <li class="post-list-item">
+        <article id="post-Monkey"
+  class="article article-type-post" itemprop="blogPost">
+     
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/12/11/Monkey/">Monkey Note</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time datetime="2016-12-11T09:50:04.000Z" itemprop="datePublished" class="post-time">
+  2016-12-11
+</time>
+
+        
+
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+     
+        <blockquote>
+<p>Monkey就是模拟一系列的事件流操作</p>
+</blockquote>
+<p><img src="http://o9sbm4il4.bkt.clouddn.com/monkey.png" alt="事件流"></p>
+<p><a href="http://www.imooc.com/video/13011" target="_blank" rel="external">图片来自慕课网</a></p>
+<h2 id="MonkeyScritp"><a href="#MonkeyScritp" class="headerlink" title="MonkeyScritp"></a>MonkeyScritp</h2><blockquote>
+<p>MonkeyScritp 是一组可以被Monkey识别的指令 可以完成重复固定的操作</p>
+</blockquote>
+<h3 id="ADB-基本-API"><a href="#ADB-基本-API" class="headerlink" title="ADB 基本 API"></a>ADB 基本 API</h3><ol>
+<li><p>列出已连接ADB的设备</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb devices</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装测试APP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb install package.apk</div></pre></td></tr></table></figure>
+</li>
+<li><p>发送基本压力测试指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey 1000</div></pre></td></tr></table></figure>
+</li>
+<li><p>获取APK包名（获取到的是当前停留的应用包名）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb logcat | grep START</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="Monkey-高级参数"><a href="#Monkey-高级参数" class="headerlink" title="Monkey 高级参数"></a>Monkey 高级参数</h3><ol>
+<li><p>指定包名测试( -p package.name )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name 100</div></pre></td></tr></table></figure>
+</li>
+<li><p>指定事件之间的间隔( –throttle value )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name --throttle 100 100</div></pre></td></tr></table></figure>
+</li>
+<li><p>基于Seed值生成唯一的操作事件( -s value )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name -s 100 10</div></pre></td></tr></table></figure>
+</li>
+<li><p>触摸事件( –ptc-touch percent )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name --pct-touch 50 100</div></pre></td></tr></table></figure>
+</li>
+<li><p>列出完成事件的类型( -v )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -v -p package.name --pct-touch 50 100</div></pre></td></tr></table></figure>
+</li>
+<li><p>动作事件，Action_Down,Up( –pct-motion )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name --pct-motion 50 100</div></pre></td></tr></table></figure>
+</li>
+<li><p>轨迹球事件( –pct-trackball )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name --pct-trackball 50 100</div></pre></td></tr></table></figure>
+</li>
+<li><p>基本导航事件，输入设备的上，下，左，右( –pct-nav )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name --pct-nav 50 100</div></pre></td></tr></table></figure>
+</li>
+<li><p>主要导航事件，Home,Back,Menu( –pct-majornav )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name --pct-majornav 50 100</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动Activity事件( –pct-appswich )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name --pct-appswitch 50 100</div></pre></td></tr></table></figure>
+</li>
+<li><p>不常用事件( –pct-anyevent )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name --pct-anyevent 50 100</div></pre></td></tr></table></figure>
+</li>
+<li><p>忽略崩溃事件( –ignore-crashes )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name --ignore-crashes 100</div></pre></td></tr></table></figure>
+</li>
+<li><p>超时事件-ANR( –ignore-timeouts )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name --ignore-timeouts 100</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="MonkeyRunner"><a href="#MonkeyRunner" class="headerlink" title="MonkeyRunner"></a>MonkeyRunner</h2><h3 id="MonkeyRunner-1"><a href="#MonkeyRunner-1" class="headerlink" title="MonkeyRunner"></a>MonkeyRunner</h3><blockquote>
+<p>MonkeyRunner 可以完成模拟事件以及截图操作</p>
+</blockquote>
+<h3 id="MonkeyDevice"><a href="#MonkeyDevice" class="headerlink" title="MonkeyDevice"></a>MonkeyDevice</h3><blockquote>
+<p>MonkeyDevice 提供Install,Uninstall,发送模拟事件</p>
+</blockquote>
+<h3 id="MonkeyImage"><a href="#MonkeyImage" class="headerlink" title="MonkeyImage"></a>MonkeyImage</h3><blockquote>
+<p>MonkeyImage 可以完成图像保存，对比操作</p>
+</blockquote>
+
+    
+    
+        <a href="/2016/12/11/Monkey/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AutomatedTesting/">AutomatedTesting</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Monkey/">Monkey</a></li></ul>
+
+</article>
+
+    </li>
+  
+    <li class="post-list-item">
         <article id="post-InflateException"
   class="article article-type-post" itemprop="blogPost">
      
