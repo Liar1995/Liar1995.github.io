@@ -47,7 +47,7 @@ ADB 基本 API
 发送基本压力测试指令
 1$ adb shell monkey 1000">
 <meta property="og:image" content="http://o9sbm4il4.bkt.clouddn.com/monkey.png">
-<meta property="og:updated_time" content="2016-12-11T10:07:36.844Z">
+<meta property="og:updated_time" content="2016-12-14T02:51:08.716Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Monkey Note">
 <meta name="twitter:description" content="Monkey就是模拟一系列的事件流操作
@@ -243,7 +243,7 @@ ADB 基本 API
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MonkeyScritp"><span class="post-toc-number">1.</span> <span class="post-toc-text">MonkeyScritp</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ADB-基本-API"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">ADB 基本 API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Monkey-高级参数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Monkey 高级参数</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MonkeyRunner"><span class="post-toc-number">2.</span> <span class="post-toc-text">MonkeyRunner</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MonkeyRunner-1"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">MonkeyRunner</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MonkeyDevice"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">MonkeyDevice</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MonkeyImage"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">MonkeyImage</span></a></li></ol></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MonkeyScritp"><span class="post-toc-number">1.</span> <span class="post-toc-text">MonkeyScritp</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ADB-基本-API"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">ADB 基本 API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Monkey-高级参数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Monkey 高级参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用MonkeyScript完成固定操作-脚本语法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">使用MonkeyScript完成固定操作(脚本语法)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MonkeyRunner"><span class="post-toc-number">2.</span> <span class="post-toc-text">MonkeyRunner</span></a></li></ol>
             </nav>
             
         </aside>
@@ -314,15 +314,65 @@ ADB 基本 API
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -p package.name --ignore-timeouts 100</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h2 id="MonkeyRunner"><a href="#MonkeyRunner" class="headerlink" title="MonkeyRunner"></a>MonkeyRunner</h2><h3 id="MonkeyRunner-1"><a href="#MonkeyRunner-1" class="headerlink" title="MonkeyRunner"></a>MonkeyRunner</h3><blockquote>
+<h3 id="使用MonkeyScript完成固定操作-脚本语法"><a href="#使用MonkeyScript完成固定操作-脚本语法" class="headerlink" title="使用MonkeyScript完成固定操作(脚本语法)"></a>使用MonkeyScript完成固定操作(脚本语法)</h3><ol>
+<li><p>执行Monkey脚本的命令( -f file.name count )</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell monkey -f file.name 10</div></pre></td></tr></table></figure>
+</li>
+<li><p>轨迹球事件( DispatchTrackball ),用于向一个坐标点（即：x坐标，y坐标）发送跟踪球消息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DispatchTrackball(long downTime, long eventTime, int action, float x, float y, float pressure, float size, int metaState, float xPrecision, float yPrecision, int device, int edgeFlags)</div></pre></td></tr></table></figure>
+</li>
+<li><p>发送键值 (DispatchKey)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DispatchKey(long downTime, long eventTime, intaction, int code, int repeat, int metaState, int device, int scancode)</div></pre></td></tr></table></figure>
+</li>
+<li><p>输入字符串事件命令  (DispatchString)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DispatchString(String text)</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动应用命令  (LaunchActivity)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">LaunchActivity(String pkgName, String clsName)</div></pre></td></tr></table></figure>
+</li>
+<li><p>等待事件命令   (UserWait)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">UserWait(ong waittime); //单位毫秒</div></pre></td></tr></table></figure>
+</li>
+<li><p>按下键盘上指定键的命令    (DispatchPress)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DispatchPress(int keyCode)</div></pre></td></tr></table></figure>
+</li>
+<li><p>开启软键盘命令     (DispatchFlip)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">DispatchFlip(boolean open)：open表示是否打开软键盘，true为打开</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="MonkeyRunner"><a href="#MonkeyRunner" class="headerlink" title="MonkeyRunner"></a>MonkeyRunner</h2><blockquote>
 <p>MonkeyRunner 可以完成模拟事件以及截图操作</p>
 </blockquote>
-<h3 id="MonkeyDevice"><a href="#MonkeyDevice" class="headerlink" title="MonkeyDevice"></a>MonkeyDevice</h3><blockquote>
-<p>MonkeyDevice 提供Install,Uninstall,发送模拟事件</p>
-</blockquote>
-<h3 id="MonkeyImage"><a href="#MonkeyImage" class="headerlink" title="MonkeyImage"></a>MonkeyImage</h3><blockquote>
-<p>MonkeyImage 可以完成图像保存，对比操作</p>
-</blockquote>
+<ol>
+<li><p>等待设备连接   (watiForConnection)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">waitForConnection(float fimeout,string deviceId)</div></pre></td></tr></table></figure>
+</li>
+<li><p>alert:弹出警告框   (alert)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert(string message,string title,string okTitle)</div></pre></td></tr></table></figure>
+</li>
+<li><p>滑动（拖动）屏幕    (drag)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drag(tuple start,tuple end,float duration,integer steps)</div></pre></td></tr></table></figure>
+</li>
+<li><p>模块按键按下操作 (press)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">press(string keycode,dictionary type)</div></pre></td></tr></table></figure>
+</li>
+<li><p>启动Activity  (startActivity)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">startActivity(pkgNmae+”/”+activityName)</div></pre></td></tr></table></figure>
+</li>
+<li><p>点击（触摸）操作 (touch)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch(integer x,integer y,integer type)</div></pre></td></tr></table></figure>
+</li>
+<li><p>输入内容操作  (type)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">type(string content)</div></pre></td></tr></table></figure>
+</li>
+<li><p>截屏操作   (takeSnapshot)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">takeSnapshot()</div></pre></td></tr></table></figure>
+</li>
+<li><p>保存文件操作    (writeToFile)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">writeToFile（string path,string format）</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><a href="http://blog.csdn.net/true100/article/details/52848615" target="_blank" rel="external">用Python语言编写脚本，参数详情参考</a></p>
 
 
             
