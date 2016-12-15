@@ -4,9 +4,9 @@
   <subtitle>With the ability to hold up your ambition</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://summer.com/"/>
-  <updated>2016-12-14T02:51:08.716Z</updated>
-  <id>http://summer.com/</id>
+  <link href="http://cocomeng.com/"/>
+  <updated>2016-12-15T07:02:13.735Z</updated>
+  <id>http://cocomeng.com/</id>
   
   <author>
     <name>Summer 〃</name>
@@ -17,10 +17,10 @@
   
   <entry>
     <title>Monkey Note</title>
-    <link href="http://summer.com/2016/12/11/Monkey/"/>
-    <id>http://summer.com/2016/12/11/Monkey/</id>
+    <link href="http://cocomeng.com/2016/12/11/Monkey/"/>
+    <id>http://cocomeng.com/2016/12/11/Monkey/</id>
     <published>2016-12-11T09:50:04.000Z</published>
-    <updated>2016-12-14T02:51:08.716Z</updated>
+    <updated>2016-12-15T07:02:13.735Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>Monkey就是模拟一系列的事件流操作</p>
@@ -144,6 +144,17 @@
 </li>
 </ol>
 <p><a href="http://blog.csdn.net/true100/article/details/52848615" target="_blank" rel="external">用Python语言编写脚本，参数详情参考</a></p>
+<h2 id="Kill-Monkey"><a href="#Kill-Monkey" class="headerlink" title="Kill Monkey"></a>Kill Monkey</h2><p>有时候设置的运行次数太多了，一直停不下来，因为Monkey运行在手机系统里，即使拔掉连接线，照样在手机上运行，因此，把Monkey运行的进程杀死，这样就能停止Monkey运行了。</p>
+<ol>
+<li>查找Monkey进程 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell ps | grep monkey</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>返回来的第一个数字，即是monkey的进程号。</p>
+<ol>
+<li>Kill Monkey <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell kill xxx</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这个时候Monkey就停止运行了</p>
 ]]></content>
     
     <summary type="html">
@@ -157,16 +168,16 @@
     </summary>
     
     
-      <category term="Monkey" scheme="http://summer.com/tags/Monkey/"/>
+      <category term="Monkey" scheme="http://cocomeng.com/tags/Monkey/"/>
     
-      <category term="AutomatedTesting" scheme="http://summer.com/tags/AutomatedTesting/"/>
+      <category term="AutomatedTesting" scheme="http://cocomeng.com/tags/AutomatedTesting/"/>
     
   </entry>
   
   <entry>
     <title>InflateException</title>
-    <link href="http://summer.com/2016/10/13/InflateException/"/>
-    <id>http://summer.com/2016/10/13/InflateException/</id>
+    <link href="http://cocomeng.com/2016/10/13/InflateException/"/>
+    <id>http://cocomeng.com/2016/10/13/InflateException/</id>
     <published>2016-10-13T09:33:50.000Z</published>
     <updated>2016-10-13T09:35:52.367Z</updated>
     
@@ -199,14 +210,14 @@
     </summary>
     
     
-      <category term="InflateException" scheme="http://summer.com/tags/InflateException/"/>
+      <category term="InflateException" scheme="http://cocomeng.com/tags/InflateException/"/>
     
   </entry>
   
   <entry>
     <title>VideoRender</title>
-    <link href="http://summer.com/2016/10/11/VideoRender/"/>
-    <id>http://summer.com/2016/10/11/VideoRender/</id>
+    <link href="http://cocomeng.com/2016/10/11/VideoRender/"/>
+    <id>http://cocomeng.com/2016/10/11/VideoRender/</id>
     <published>2016-10-11T10:05:05.000Z</published>
     <updated>2016-10-11T10:21:02.124Z</updated>
     
@@ -231,22 +242,22 @@
     </summary>
     
     
-      <category term="SurfaceTexture" scheme="http://summer.com/tags/SurfaceTexture/"/>
+      <category term="SurfaceTexture" scheme="http://cocomeng.com/tags/SurfaceTexture/"/>
     
-      <category term="TextureView" scheme="http://summer.com/tags/TextureView/"/>
+      <category term="TextureView" scheme="http://cocomeng.com/tags/TextureView/"/>
     
-      <category term="SurfaceView" scheme="http://summer.com/tags/SurfaceView/"/>
+      <category term="SurfaceView" scheme="http://cocomeng.com/tags/SurfaceView/"/>
     
-      <category term="GLSurfaceView" scheme="http://summer.com/tags/GLSurfaceView/"/>
+      <category term="GLSurfaceView" scheme="http://cocomeng.com/tags/GLSurfaceView/"/>
     
-      <category term="VideoRender" scheme="http://summer.com/tags/VideoRender/"/>
+      <category term="VideoRender" scheme="http://cocomeng.com/tags/VideoRender/"/>
     
   </entry>
   
   <entry>
     <title>IOS 10 Wallpager</title>
-    <link href="http://summer.com/2016/07/04/IOS-10-Wallpager/"/>
-    <id>http://summer.com/2016/07/04/IOS-10-Wallpager/</id>
+    <link href="http://cocomeng.com/2016/07/04/IOS-10-Wallpager/"/>
+    <id>http://cocomeng.com/2016/07/04/IOS-10-Wallpager/</id>
     <published>2016-07-04T10:27:52.000Z</published>
     <updated>2016-07-04T10:54:59.443Z</updated>
     
@@ -261,14 +272,14 @@
     </summary>
     
     
-      <category term="IOS Wallpager" scheme="http://summer.com/tags/IOS-Wallpager/"/>
+      <category term="IOS Wallpager" scheme="http://cocomeng.com/tags/IOS-Wallpager/"/>
     
   </entry>
   
   <entry>
     <title>Hello World</title>
-    <link href="http://summer.com/2016/07/01/hello-world/"/>
-    <id>http://summer.com/2016/07/01/hello-world/</id>
+    <link href="http://cocomeng.com/2016/07/01/hello-world/"/>
+    <id>http://cocomeng.com/2016/07/01/hello-world/</id>
     <published>2016-07-01T07:25:45.596Z</published>
     <updated>2016-08-30T10:23:38.051Z</updated>
     

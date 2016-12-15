@@ -30,7 +30,7 @@ ADB 基本 API
 1$ adb shell monkey 1000">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Monkey Note">
-<meta property="og:url" content="http://summer.com/2016/12/11/Monkey/index.html">
+<meta property="og:url" content="http://cocomeng.com/2016/12/11/Monkey/index.html">
 <meta property="og:site_name" content="Summer〃">
 <meta property="og:description" content="Monkey就是模拟一系列的事件流操作
 
@@ -49,7 +49,7 @@ ADB 基本 API
 发送基本压力测试指令
 1$ adb shell monkey 1000">
 <meta property="og:image" content="http://o9sbm4il4.bkt.clouddn.com/monkey.png">
-<meta property="og:updated_time" content="2016-12-14T02:51:08.716Z">
+<meta property="og:updated_time" content="2016-12-15T07:02:13.735Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Monkey Note">
 <meta name="twitter:description" content="Monkey就是模拟一系列的事件流操作
@@ -195,7 +195,7 @@ ADB 基本 API
     <aside class="post-widget">
         <nav class="post-toc-wrap" id="post-toc">
             <h4>TOC</h4>
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MonkeyScritp"><span class="post-toc-number">1.</span> <span class="post-toc-text">MonkeyScritp</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ADB-基本-API"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">ADB 基本 API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Monkey-高级参数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Monkey 高级参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用MonkeyScript完成固定操作-脚本语法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">使用MonkeyScript完成固定操作(脚本语法)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MonkeyRunner"><span class="post-toc-number">2.</span> <span class="post-toc-text">MonkeyRunner</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MonkeyScritp"><span class="post-toc-number">1.</span> <span class="post-toc-text">MonkeyScritp</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ADB-基本-API"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">ADB 基本 API</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Monkey-高级参数"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Monkey 高级参数</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#使用MonkeyScript完成固定操作-脚本语法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">使用MonkeyScript完成固定操作(脚本语法)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#MonkeyRunner"><span class="post-toc-number">2.</span> <span class="post-toc-text">MonkeyRunner</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Kill-Monkey"><span class="post-toc-number">3.</span> <span class="post-toc-text">Kill Monkey</span></a></li></ol>
         </nav>
     </aside>
     
@@ -336,15 +336,26 @@ ADB 基本 API
 </li>
 </ol>
 <p><a href="http://blog.csdn.net/true100/article/details/52848615" target="_blank" rel="external">用Python语言编写脚本，参数详情参考</a></p>
+<h2 id="Kill-Monkey"><a href="#Kill-Monkey" class="headerlink" title="Kill Monkey"></a>Kill Monkey</h2><p>有时候设置的运行次数太多了，一直停不下来，因为Monkey运行在手机系统里，即使拔掉连接线，照样在手机上运行，因此，把Monkey运行的进程杀死，这样就能停止Monkey运行了。</p>
+<ol>
+<li>查找Monkey进程 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell ps | grep monkey</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>返回来的第一个数字，即是monkey的进程号。</p>
+<ol>
+<li>Kill Monkey <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell kill xxx</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这个时候Monkey就停止运行了</p>
 
         </div>
         
         <blockquote class="post-copyright">
     <div class="content">
-        这里写留言或版权声明：<a href="/2016/12/11/Monkey/" target="_blank" rel="external">http://summer.com/2016/12/11/Monkey/</a>
+        这里写留言或版权声明：<a href="/2016/12/11/Monkey/" target="_blank" rel="external">http://cocomeng.com/2016/12/11/Monkey/</a>
     </div>
     <footer>
-        <a href="http://summer.com">
+        <a href="http://cocomeng.com">
             <img src="/img/avatar.png" alt="Summer 〃">
             Summer 〃
         </a>
@@ -426,7 +437,7 @@ ADB 基本 API
             
     
 <div class="duoshuo">
-	<div class="ds-thread" data-thread-key="Monkey" data-title="Monkey Note" data-url="http://summer.com/2016/12/11/Monkey/"></div>
+	<div class="ds-thread" data-thread-key="Monkey" data-title="Monkey Note" data-url="http://cocomeng.com/2016/12/11/Monkey/"></div>
 </div>
 <script src="/js/embed.min.js?v=1.1.9"></script>
 <script src="//cdn.bootcss.com/marked/0.3.6/marked.min.js" async="async"></script>
@@ -474,7 +485,7 @@ BLOG.SHARE = {
 title: "Monkey Note",
 pic: "/img/avatar.png",
 summary: document.getElementsByName('summary')[0].content,
-url: "http://summer.com/2016/12/11/Monkey/" }
+url: "http://cocomeng.com/2016/12/11/Monkey/" }
 </script>
 <div class="global-share" id="global-share">
     <div class="tit">分享到：</div>
