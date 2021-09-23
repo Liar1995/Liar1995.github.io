@@ -767,6 +767,8 @@ a:hover
 }
 
 .year-style{
-    font-size: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 }
