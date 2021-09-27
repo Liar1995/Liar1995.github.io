@@ -2,6 +2,20 @@
 /** 1. Basic
 *******************************************************************/
 
+#welcome {
+    position: relative;
+    z-index: 1;
+    margin: auto 0;
+    margin-left: 15vw;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
 html
 {
     font-size: 10px !important;
@@ -9,14 +23,16 @@ html
 
 body
 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 300;
-    font-style: normal;
-
-    color: #fff;
-    background: #0c0c0c;
-
-    -webkit-font-smoothing: antialiased;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #833ab4;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 body.contains-hero
@@ -771,4 +787,8 @@ a:hover
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.sub-page{
+    padding: 5px;
 }
