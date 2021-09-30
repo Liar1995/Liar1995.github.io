@@ -107,7 +107,7 @@ float snoise(vec3 v)
 `;
 
 const shaders = {
-  fragment: `
+    fragment: `
 
 	uniform vec2 resolution;
 	uniform float time;
@@ -150,44 +150,46 @@ const shaders = {
 	}
 
 `,
-  vertex: `
+    vertex: `
 
 	void main() {
 
 		gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
 	}
-` };
+`
+};
 
 
 const container = document.body;
 
-let width = container.offsetWidth,
-height = container.offsetHeight,
-currentTime = 0,
-timeAddition = Math.random() * 1000;
+let width = container.offsetWidth, height = container.clientHeight,
+    currentTime = 0,
+    timeAddition = Math.random() * 1000;
 
 const scene = new THREE.Scene(),
-camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 100);
-renderer = new THREE.WebGLRenderer({ alpha: true });
+    camera = new THREE.OrthographicCamera(width / -2, width / 2, height / 2, height / -2, 0, 100);
+renderer = new THREE.WebGLRenderer({alpha: true});
 startTime = new Date().getTime();
 
-renderer.setSize(container.offsetWidth, container.offsetHeight);
+renderer.setSize(container.offsetWidth, container.clientHeight);
 container.appendChild(renderer.domElement);
 
 
 let uniforms = {
-  time: { value: 1 + timeAddition },
-  resolution: { value: new THREE.Vector2(container.offsetWidth, container.offsetHeight) } };
+    time: {value: 1 + timeAddition},
+    resolution: {value: new THREE.Vector2(container.offsetWidth, container.clientHeight)}
+};
 
 
 let shaderMaterial = new THREE.ShaderMaterial({
-  uniforms: uniforms,
-  vertexShader: shaders.vertex,
-  fragmentShader: shaders.fragment,
-  //blending:       THREE.AdditiveBlending,
-  depthTest: false,
-  transparent: true,
-  vertexColors: true });
+    uniforms: uniforms,
+    vertexShader: shaders.vertex,
+    fragmentShader: shaders.fragment,
+    //blending:       THREE.AdditiveBlending,
+    depthTest: false,
+    transparent: true,
+    vertexColors: true
+});
 
 
 let geometry = new THREE.PlaneGeometry(width, height, 32);
@@ -201,11 +203,12 @@ camera.position.x = 0;
 camera.position.z = 100;
 
 function render() {
-  var now = new Date().getTime();
-  currentTime = (now - startTime) / 1000;
-  uniforms.time.value = currentTime + timeAddition;
+    var now = new Date().getTime();
+    currentTime = (now - startTime) / 1000;
+    uniforms.time.value = currentTime + timeAddition;
 
-  requestAnimationFrame(render);
-  renderer.render(scene, camera);
+    requestAnimationFrame(render);
+    renderer.render(scene, camera);
 }
+
 render();
