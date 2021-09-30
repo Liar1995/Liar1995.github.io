@@ -131,7 +131,14 @@
 <script type="text/javascript" src="assets/js/main.js"></script>
 
 <script type="text/javascript"  src="assets/js/three.min.js"></script>
-<script type="text/javascript" defer async src="assets/js/index.js"></script>
+
+<script type="text/javascript">
+    setTimeout(()=>{
+        const element = document.createElement("script");
+        element.src = "assets/js/index.js";
+        document.body.appendChild(element);
+    },100)
+</script>
 
 </body>
 
