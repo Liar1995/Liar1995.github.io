@@ -101,7 +101,7 @@ float snoise(vec3 v)
 // Mix final noise value
   vec4 m = max(0.6 - vec4(dot(x0,x0), dot(x1,x1), dot(x2,x2), dot(x3,x3)), 0.0);
   m = m * m;
-  return 42.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), 
+  return 22.0 * dot( m*m, vec4( dot(p0,x0), dot(p1,x1), 
                                 dot(p2,x2), dot(p3,x3) ) );
   }
 `;
@@ -133,7 +133,7 @@ const shaders = {
 
 	void main() {
 		float speed = 8.;
-		float scale = .6;
+		float scale = 3.;
 		float opacity = 1.;
 
 		vec2 st = gl_FragCoord.xy/resolution.xy;
