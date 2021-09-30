@@ -1,5 +1,5 @@
 jQuery(window).on('load', function() {
-        
+
     // HIDE PRELAODER
     $(".preloader").addClass("preloader-hidden");
 
@@ -25,8 +25,8 @@ jQuery(window).on('load', function() {
 
 jQuery(document).ready(function($) {
 	"use strict";
-    
-    
+
+
     // INIT PARALLAX PLUGIN
     $(".hero .background-content.parallax-on").parallax({
         scalarX: 24,
@@ -34,20 +34,20 @@ jQuery(document).ready(function($) {
         frictionX: 0.1,
         frictionY: 0.1,
     });
-    
-    
+
+
     // SCROLL TOP BUTTON
     $(".scroll-top").click(function() {
-        
+
       $("html, body").animate({ scrollTop: 0 }, 400);
       return false;
-        
+
     });
-    
-    
+
+
     // SCROLL REVEAL SETUP
     window.sr = ScrollReveal();
-    sr.reveal(".scroll-animated-from-bottom", { 
+    sr.reveal(".scroll-animated-from-bottom", {
         duration: 600,
         delay: 500,
         origin: "bottom",
@@ -58,8 +58,8 @@ jQuery(document).ready(function($) {
         scale: 1,
         useDelay: 'onload',
     });
-    
-    
+
+
     // IMAGE CAROUSEL
     $('.image-carousel').owlCarousel({
         center: true,
@@ -68,16 +68,16 @@ jQuery(document).ready(function($) {
         margin: 0,
         autoplay: true,
         responsive:{
-            800:{
-                items: 2,
+            300:{
+                items: 5,
             },
         }
     });
-    
-    
+
+
     // HERO/BUTTON ON SCROLL ANIMATING
     function onScrollAnimating() {
-		
+
 		var windowHeight = $( ".hero" ).height(),
             frontContent = $(".hero .front-content"),
             backContent = $(".hero .background-content"),
@@ -87,82 +87,82 @@ jQuery(document).ready(function($) {
 			calculatedScaleFrontContent,
 			calculatedTranslateHeader,
 			calculatedOpacityBackground;
-        
-		
+
+
 		function navigationButtonHide() {
-			
+
 			if ( calculatedTranslateHeader <= 200 ) {
-                
+
 			    navigationButton.css( "transform", "translateX(" + calculatedTranslateHeader + "%) translateY(-50%)");
 
 			} else if ( scrollOffset > windowHeight ) {
-                
+
 			    navigationButton.css( "transform", "translateX(200%) translateY(-50%)");
-				
+
 			}
 		}
-		
+
 		function frontContentMargin() {
-			
+
 			if ( scrollOffset <= windowHeight ) {
 
 				frontContent.css( "margin-top", scrollOffset );
 
 			} else if ( scrollOffset > windowHeight ) {
-				
+
 				frontContent.css( "margin-top", windowHeight );
-				
+
 			}
-			
+
 		}
-		
+
 		function frontContentOpacity() {
-			
+
 			if ( calculatedOpacityFrontContent >= 0 ) {
 
 				frontContent.css( "opacity", calculatedOpacityFrontContent);
 
 			} else if ( scrollOffset > windowHeight ) {
-				
+
 				frontContent.css( "opacity", "0");
-				
+
 			}
 		}
-		
+
 		function frontContentScale() {
-			
+
 			if ( calculatedScaleFrontContent >= 0.4 ) {
-				
+
 				frontContent.css( "transform", "scale(" + calculatedScaleFrontContent + ")");
 
 			} else if ( scrollOffset > windowHeight ) {
-				
+
 				frontContent.css( "transform", "scale(0.6)");
-				
+
 			}
-			
+
 		}
-		
+
 		function backgroundOpacity() {
-			
+
 			if ( calculatedOpacityBackground >= 0 ) {
 
 				backContent.css( "opacity", calculatedOpacityBackground );
 
 			} else if ( scrollOffset > windowHeight ) {
-				
+
 				backContent.css( "opacity", "0" );
-				
+
 			}
-			
+
 		}
-		
+
 		function runStep() {
-			
+
 			scrollOffset = $( window ).scrollTop();
-            
+
             if(windowHeight > scrollOffset && scrollOffset >= 0) {
-			
+
                 calculatedTranslateHeader = ( scrollOffset / windowHeight) * 650;
                 calculatedOpacityFrontContent = 1 - ( scrollOffset / windowHeight) * 4.2;
                 calculatedScaleFrontContent = 1 - ( scrollOffset / windowHeight) * 1.2;
@@ -173,11 +173,11 @@ jQuery(document).ready(function($) {
                 frontContentOpacity();
                 frontContentScale();
                 backgroundOpacity();
-                
+
             }
-			
+
 		}
-		
+
 		$( window ).on( 'resize', function(){
 
 			windowHeight = $( ".hero" ).height();
@@ -185,16 +185,16 @@ jQuery(document).ready(function($) {
 		});
 
 		$( window ).scroll(function() {
-            
+
 			runStep();
 
 		});
-		
+
 		runStep();
-		
+
 	}
-	
+
 	onScrollAnimating();
-    
-    
+
+
 });
