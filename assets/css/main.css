@@ -1,6 +1,11 @@
 
 /** 1. Basic
 *******************************************************************/
+@font-face{
+    font-family: 'accent';
+    src: url('../fonts/Prism-Regular-1.otf');
+}
+
 
 #welcome {
     position: relative;
@@ -47,17 +52,18 @@ h4,
 h5,
 h6,
 p,
+li,
 a
 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'accent', serif;
     font-weight: normal;
-
     color: #fff;
 }
 
-h1
+h1,span
 {
-    font-size: 10rem;
+    color: #fff;
+    font-size: 15rem;
 }
 
 h2
@@ -422,7 +428,6 @@ a:hover
 .hero .front-content .container-mid p.subline
 {
     font-size: 3rem;
-
     letter-spacing: .025em;
 }
 
